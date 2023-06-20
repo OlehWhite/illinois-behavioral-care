@@ -112,7 +112,7 @@ export const LayoutHeader: FC = () => {
             />
           </WrapperImg>
           <FollowInfo>
-            <Title>Follow Us</Title>
+            <Title sx={{ fontSize: '14.5px' }}>Follow Us</Title>
             <WrapperFollow>
               <LinkA href={linkFacebook} target="_blank">
                 <Image
