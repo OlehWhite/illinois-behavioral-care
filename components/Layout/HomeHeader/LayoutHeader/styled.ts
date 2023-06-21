@@ -16,11 +16,41 @@ export const Wrapper = styled(Box)(() => {
   };
 });
 
+export const ContactInfo = styled(Box)(() => {
+  return {};
+});
+
+export const Tel = styled(Box)(() => {
+  return {
+    marginBottom: 6,
+    color: "white",
+    fontWeight: 600,
+    fontSize: 14,
+  };
+});
+
+export const Address = styled(Box)(() => {
+  return {
+    color: "white",
+    fontWeight: 600,
+    fontSize: 13,
+    lineHeight: "22px",
+    width: 180,
+    cursor: "pointer",
+    transition: ".3s",
+
+    "&:hover": {
+      color: "#3498db",
+    },
+  };
+});
 
 export const ContactAndFollow = styled(Box)(() => {
   return {
     display: "flex",
     justifyContent: "space-between",
+    maxWidth: 615,
+    width: "100%",
     alignItems: "center",
 
     "@media (max-width: 950px)": {
@@ -36,6 +66,11 @@ export const Follow = styled(Box)(() => {
   };
 });
 
+export const Contact = styled(Box)(() => {
+  return {
+    display: "flex",
+  };
+});
 
 export const FollowInfo = styled(Box)(() => {
   return {

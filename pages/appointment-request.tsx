@@ -22,8 +22,9 @@ import { Feedbacks } from "../components/Feedbacks/Feedbacks";
 import { PRIVATE_DATA } from "../otherPages/privateData";
 import { Iframe } from "../otherPages/career/style";
 import IMGHeader from "../public/NAPr4GWk.jpeg";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Head from "next/head";
+import axios from "axios";
 
 interface IForm {
   Name: string;
@@ -32,6 +33,8 @@ interface IForm {
   Preferred_Data_And_Time: string;
   Message: string;
 }
+
+const ID = "illinoisBehavioralCareTelEmailAddress";
 
 const AppointmentRequest = () => {
   const {
@@ -50,6 +53,22 @@ const AppointmentRequest = () => {
     },
   });
   const [state, stateSubmit] = useFormspree(`${PRIVATE_DATA.keyID}`);
+  const [googleMap, setGoogleMap] = useState<string>("");
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://cdn.contentful.com/spaces/${PRIVATE_DATA.spaseID}/entries?content_type=${ID}&access_token=${PRIVATE_DATA.accessId}`
+      )
+      .then((response) => {
+        setGoogleMap(
+          response.data.items[0].fields.googleMap.content[0].content[0].value
+        );
+      })
+      .catch((error) => {
+        console.error("Error fetching posts:", error);
+      });
+  }, []);
 
   const onSubmit = async (data: any) => {
     await stateSubmit(data);
@@ -124,7 +143,7 @@ const AppointmentRequest = () => {
           </Box>
         </Wrapper>
         <Box sx={{ width: "100%", maxWidth: "1300px", margin: "0 auto 35px" }}>
-          <Iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.836713694201!2d-74.4243125246827!3d40.41246795589985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c3c5710ac7b9cd%3A0x2a1b05a115f4c381!2s6%20Cornwall%20Ct%20B%2C%20East%20Brunswick%2C%20NJ%2008816!5e0!3m2!1sen!2sus!4v1684616255217!5m2!1sen!2sus"></Iframe>
+          <Iframe src={googleMap}></Iframe>
         </Box>
         <Feedbacks />
       </Box>
